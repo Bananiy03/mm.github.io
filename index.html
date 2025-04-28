@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мария & Михаил | Свадьба 02.08.2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Grinlane&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Grinlane', 'Playfair Display', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f3f0;
+            color: #333;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        header {
+            background: url('https://i.pinimg.com/736x/fb/32/03/fb3203acb9f3c1bcbd05359077c09a72.jpg') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            color: #5d4435;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
+            position: relative;
+            padding-bottom: 15vh;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 0;
+        }
+
+        header > * {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 2vh;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin: 0;
+            letter-spacing: 3px;
+            color: #5d4435;
+        }
+
+        .date {
+            font-size: 2.5em;
+            margin: 10px 0;
+            font-weight: bold;
+            color: #5d4435;
+        }
+
+        header p {
+            font-size: 1.8em;
+            margin: 400px 0 10vh 0;
+            color: #5d4435;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #a78a7a;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            margin: 15px;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #8a7162;
+            transform: scale(1.05);
+        }
+
+        #timer {
+            font-size: 1.8em;
+            margin: 30px 0;
+            color: #a78a7a;
+        }
+
+        #rsvp-form {
+            background: rgba(255, 248, 240, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        input, textarea, button {
+            font-family: 'Playfair Display', serif;
+        }
+
+        input, textarea {
+            width: 80%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        footer {
+            background: #5d4435;
+            color: white;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .date { font-size: 1.8em; }
+            header p { font-size: 1.4em; }
+            input, textarea { width: 90%; }
+            header { padding-bottom: 8vh; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Мария & Михаил</h1>
+        <div class="date">2 августа 2025 в 13:30</div>
+        <p>Приглашаем вас на нашу свадьбу!</p>
+    </header>
+
+    <div class="container">
+        <div id="timer"></div>
+
+        <h2>Добро пожаловать!</h2>
+        <p>Мы рады разделить с вами этот особенный день.</p>
+
+        <h3>Программа</h3>
+        <p>13:00 - Сбор гостей на борту<br>13:30 - Церемония<br>15:00 - Фуршет и прогулка по Москве-реке</p>
+
+        <h3>Место проведения</h3>
+        <p>Пассажирский теплоход флотилии "Рэдиссон Ройал"<br>
+        <small>Российская Федерация, Москва, наб. Тараса Шевченко</small></p>
+
+        <a href="#rsvp-form" class="btn">Подтвердить присутствие</a>
+    </div>
+
+<!--    <div class="container" id="rsvp-form">-->
+<!--        <h2>Подтвердите ваше присутствие</h2>-->
+<!--        <form id="weddingForm">-->
+<!--            <input type="text" placeholder="Ваше имя" required>-->
+<!--            <textarea placeholder="Ваши пожелания (необязательно)" rows="3"></textarea>-->
+<!--            <button type="submit" class="btn">Отправить</button>-->
+<!--        </form>-->
+<!--    </div>-->
+
+    <form id="weddingForm">
+    <input type="text" id="name" placeholder="Ваше имя" required>
+    <textarea id="message" placeholder="Ваши пожелания" rows="3"></textarea>
+    <button type="button" class="btn" onclick="sendToTelegram()">Отправить</button>
+</form>
+
+<script>
+function sendToTelegram() {
+    const name = document.getElementById('name').value;
+    const message = document.getElementById('message').value;
+    const token = "7148137926:AAETzWZ_fto1-DbDMfPr4P_xKryNJatH11Y";
+    const chat_id = "AAHciDY9AAAAANyINj10WgTN";
+    const text = `Новое подтверждение:%0AИмя: ${name}%0AПожелания: ${message}`;
+
+    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${text}`)
+        .then(response => alert("Спасибо! Ваш ответ сохранён."))
+        .catch(error => alert("Ошибка отправки."));
+}
+</script>
+
+    <footer>
+        <p>С любовью, Мария & Михаил</p>
+    </footer>
+
+    <script>
+        // Таймер до свадьбы
+        function updateTimer() {
+            const weddingDate = new Date('August 2, 2025 13:30:00').getTime();
+            const now = new Date().getTime();
+            const diff = weddingDate - now;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('timer').innerHTML = `
+                До нашего дня осталось:<br>
+                ${days} дней ${hours} часов ${minutes} минут ${seconds} секунд
+            `;
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // Обработка формы
+        document.getElementById('weddingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо! Ваш ответ сохранён. Ждём вас 2 августа 2025 года!');
+            this.reset();
+        });
+
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
